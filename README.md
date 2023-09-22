@@ -1,21 +1,3 @@
 # JustFit
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-
-https://dribbble.com/shots/13919847-Sundose-Fitness-App
-
-https://dribbble.com/shots/5613276-Workout-tracker
+A simple application to keep track of the exercises I am doing and how long it takes me to do it. There were no apps that works in a way such that I can enter my own exercise in them with custom start and break time
