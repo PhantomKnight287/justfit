@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:justfit/constants/main.dart';
+import 'package:justfit/models/workout.dart';
 
 class AddNewWorkout extends StatefulWidget {
   const AddNewWorkout({super.key});
@@ -10,9 +11,13 @@ class AddNewWorkout extends StatefulWidget {
 }
 
 class _AddNewWorkoutState extends State<AddNewWorkout> {
-  TextEditingController _nameController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
   // probably a bad idea ig
   List<String> emojis = [];
+  final TextStyle _textStyle = GoogleFonts.hankenGrotesk(fontSize: 20, fontWeight: FontWeight.w700);
+  int exercisesCount = 1;
+  List<Exercise> exercises = [Exercise()];
+
   @override
   void dispose() {
     super.dispose();
@@ -47,7 +52,7 @@ class _AddNewWorkoutState extends State<AddNewWorkout> {
               children: [
                 Text(
                   "Name",
-                  style: GoogleFonts.hankenGrotesk(fontSize: 20, fontWeight: FontWeight.w700),
+                  style: _textStyle,
                 ),
                 const SizedBox(
                   height: 10,
@@ -69,7 +74,7 @@ class _AddNewWorkoutState extends State<AddNewWorkout> {
                 ),
                 Text(
                   "Emojis",
-                  style: GoogleFonts.hankenGrotesk(fontSize: 20, fontWeight: FontWeight.w700),
+                  style: _textStyle,
                 ),
                 const SizedBox(
                   height: 10,
@@ -109,7 +114,86 @@ class _AddNewWorkoutState extends State<AddNewWorkout> {
                       )
                     ],
                   ),
-                )
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Exercises",
+                      style: _textStyle,
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        exercises.add(Exercise());
+                        setState(() {});
+                      },
+                      icon: const Icon(
+                        Icons.add,
+                        size: 30,
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                for (var i = 0; i < exercises.length; i++)
+                  Column(
+                    children: [
+                      ListTile(
+                        tileColor: Color(0xff212121),
+                        title: Text(
+                          "Sup",
+                          style: _textStyle,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return Container(
+                                height: 200,
+                                color: Colors.amber,
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      const Text('Modal BottomSheet'),
+                                      ElevatedButton(
+                                        child: const Text('Close BottomSheet'),
+                                        onPressed: () => Navigator.pop(context),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        trailing: i == 0
+                            ? null
+                            : IconButton(
+                                icon: Icon(Icons.delete),
+                                onPressed: () {
+                                  print(exercises);
+                                  exercises.removeAt(i);
+                                  setState(() {
+                                    exercisesCount--;
+                                  });
+                                },
+                              ),
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      )
+                    ],
+                  ),
               ],
             ),
           ),
